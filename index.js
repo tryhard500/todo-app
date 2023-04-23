@@ -72,7 +72,9 @@ app.post('/task-create', async (req, res) => {
 });
 
 app.get('/task-edit', async (req, res) => {
-    let id = req.query.id
+    let id = req.query.id;
+    let success = req.query.success;
+    let error = req.query.error;
     let done = await Task.find({ isDone: true }).sort({ updatedAt: -1 });
     let todo = await Task.find({ isDone: false }).sort({ createdAt: 1 });
     let task = await Task.findOne({ _id: id });
@@ -81,26 +83,30 @@ app.get('/task-edit', async (req, res) => {
     res.render('index', {
         done: done,
         todo: todo,
-        task: task
+        task: task,
+        success: success,
+        error: error
     })
 });
 
 app.post('/task-edit', async (req, res) => {
     let id = req.query.id;
     let task = await Task.findOne({ _id: id });
-    let isDone = req.body.isDone;
-    let title = req.body.title;
-    let description = req.body.description;
-    console.log(isDone,title,description);
 
-    //task.isDone = Boolean(req.body.isDone);
-    task.title = title;
-    task.description = description;
+    task.isDone = Boolean(req.body.isDone);
+    task.title = req.body.title;
+    task.description = req.body.description;
 
     try {
         task.save();
-        res.redirect(`/edit?id=${id}&success=1`);
+        res.redirect(`/task-edit?id=${id}&success=1`);
     } catch (err) {
-        res.redirect(`/edit?id=${id}&error=1`);
+        res.redirect(`/task-edit?id=${id}&error=1`);
     }
+});
+
+app.get('/task-remove',async (req,res)=>{
+    let id = req.query.id;
+    await Task.deleteOne({_id:id});
+    res.redirect('/');
 });

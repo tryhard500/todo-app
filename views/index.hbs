@@ -126,7 +126,7 @@
                         </div>
 
                         <div class="column-list p-1">
-                            <form action="/task-edit" method="POST">
+                            <form action="/task-edit?id={{task._id}}" method="POST">
 
                                 <div class="input-group mb-3">
                                     <div class="input-group-text">
@@ -148,7 +148,7 @@
                                 </div>
 
                                 <button type="submit" class="btn btn-primary">Сохранить</button>
-                                <button type="submit" class="btn btn-secondary">удалить</button>
+                                <a href="/task-remove?id={{task._id}}" class="btn btn-secondary">удалить</a>
                             </form>
                         </div>
                     </div>
