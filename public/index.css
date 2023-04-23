@@ -1,0 +1,42 @@
+* {
+    font-family: 'Arial';
+}
+
+.task .card-body {
+    display: flex;
+    align-items: stretch;
+    padding: 0;
+}
+.task-done {
+    text-decoration: none;
+    background-color: #e9ecef;
+    padding: 0.375rem 0.75rem;
+
+    height: auto;
+    border-radius: 0.375rem;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.task-done:hover {
+    background-color: #c9cbcc;
+} 
+.task-title {
+    padding: 0.375rem 0.75rem;
+    flex: 1;
+    text-decoration: none;
+    color: black;
+    width: 100%;
+}
+.task-title:hover {
+    background-color: #e9ecef;
+    font-weight: bold;
+
+}
+.column-list {
+    height: 70vh;
+    overflow: scroll;
+}
+
+.alert {
+    --bs-alert-padding-y: 2px;
+}
